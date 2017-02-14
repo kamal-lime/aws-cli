@@ -25,18 +25,29 @@ now save and exit
 
 now create a python script, 
 
+1. this will scan instances and output only is 'serveros' not tagged
+
 
 ##################
 
 import skew
 
-for instance in skew.scan('arn:aws:ec2:ap-southeast-1:882887841053:instance/*'):
+for instance in skew.scan('arn:aws:ec2:region:awsaccountno:instance/*'):
     if not instance.tags['serveros']:
         print("%s is untagged %s" % (instance.id, instance.tags['Name'],))
         
         
-        
- ########################
+########################
+
+2. below scan and output for two keys
+
+#######################
+import skew
+
+for instance in skew.scan('arn:aws:ec2:region:awsaccountno:instance/*'):
+    if not instance.tags['Team'] or  not  instance.tags['service']:
+        print("%s is untagged %s" % (instance.id, instance.tags['Name'],))
+#######################
  
  
  save it to ex- instance-tag.py
