@@ -4,3 +4,8 @@
 Now ping your ec2 instance with tag name 
 
 ansible -m ping tag_Team_infravpn --private-key=key.pem   : - here we ping all ec2 instance tag with Team - infravpn
+
+ansible -m ping all --private-key=key.pem   : - here we ping all resources
+
+
+ansible-playbook newrelic_ubuntu.yml --private-key=key.pem : run playbook with private key
