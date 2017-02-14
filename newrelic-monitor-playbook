@@ -1,0 +1,84 @@
+In AWS basicaly there is two type of server we are using , For ubuntu os - user is ubutnu and Amazon Linux user is ec2-user
+
+Now create tag all instances with there user name 
+
+for ubuntu tag serveros - ubuntu
+for Amazon linux serveros - amazon_linux
+
+here i am monitoring new relic service and script is already atached.
+
+ansible playbook file for ubuntu server
+
+vim newrelic_ubuntu.yml
+###############################
+---
+- 
+  hosts: tag_serveros_ubuntu
+  sudo: true
+  user: ubuntu
+  tasks:
+    - 
+      script: /tmp/service.sh
+      name: "Execute the script"
+      
+##################################
+
+
+for ec2-user
+
+###############################
+---
+- 
+  hosts: tag_serveros_amazon_linux
+  sudo : True
+  user: ec2-user
+  tasks:
+    - 
+      script: /tmp/service.sh
+      name: "Execute the script"
+###############################
+
+
+Now create a bash script file , it will run inventory, execute playbook and send mail alert
+
+
+vim newrelic_scan.sh
+
+
+##################################################
+
+#!/bin/bash
+
+## Below command will create a inventory of AWS resources
+/etc/ansible/ec2.py --list
+
+## it will copy the script to tmp file which is defined in newrelic yml to run
+cp /etc/ansible/scripts/service.sh /tmp/
+
+#go to ansible directory for command
+
+cd /etc/ansible/scripts/
+
+## first ansible playbook scan all ubuntu instances and check for service with user ubuntu
+
+ansible-playbook newrelic_ubuntu.yml --private-key=key.pem
+
+## second ansible playbook scan all amazon-linux instances and check for service with user ec2-user
+
+ansible-playbook newrelic_ec2-user.yml --private-key=key.pem
+
+## if any failure host in ansible it will create a filename with retry extension, this command rename the .retry file to .txt
+and uuencode mail the user with attachment
+
+for file in *.retry
+do
+ mv "$file" "${file%.retry}.txt"
+
+ (uuencode newrelic_ubuntu.txt newrelic_ubuntu.txt; uuencode newrelic_ec2-user.txt newrelic_ec2-user.txt) | mail -s "Ansible retry hosts" xyz@gmail.com
+done
+
+##################################################
+      
+      
+      
+ 
