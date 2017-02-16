@@ -25,7 +25,7 @@ now save and exit
 
 now create a python script, 
 
-1. this will scan instances and output only if 'serveros' not tagged
+1. this will scan instances and output only if 'tagkey' not tagged
 
 
 ##################
@@ -33,7 +33,7 @@ now create a python script,
 import skew
 
 for instance in skew.scan('arn:aws:ec2:region:awsaccountno:instance/*'):
-    if not instance.tags['serveros']:
+    if not instance.tags['tagkey']:
         print("%s is untagged %s" % (instance.id, instance.tags['Name'],))
         
         
@@ -66,5 +66,5 @@ if we want to print instance name with type of tags than
  
  to send alert mail 
  
- 02 9 * * * python /home/ubuntu/scripts/instance-tag.py | mail -s "New Untagged Instances List" your mail id
+ 02 9 * * * python /home/user/scripts/instance-tag.py | mail -s "New Untagged Instances List" your mail id
       
