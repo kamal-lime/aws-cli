@@ -1,0 +1,19 @@
+### to give IAM user to access everything except IAM and launch new instance
+
+
+#####################################
+{
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "NotAction": [
+                "iam:*",
+                "ec2:RunInstances"
+            ],
+            "Resource": "*"
+        }
+    ],
+    "Version": "2012-10-17"
+}
+
+#####################################
