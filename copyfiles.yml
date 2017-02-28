@@ -1,0 +1,21 @@
+If we want to copy files to remote server with ansible than 
+
+create a directory in ansible server and placed sorce files to it
+
+#####################
+---
+-
+  hosts: [instance id]
+  sudo: true
+  user: username
+  tasks:
+    -
+      copy:
+       src: /tmp/12
+       src: /tmp/13
+       dest: /var/www/
+       
+       
+       
+Here it will copy files from /tmp directory to remote hoste /var/www
+
