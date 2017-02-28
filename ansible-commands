@@ -9,3 +9,9 @@ ansible -m ping all --private-key=key.pem   : - here we ping all resources
 
 
 ansible-playbook newrelic_ubuntu.yml --private-key=key.pem : run playbook with private key
+
+
+### check disk space in remote machine with ansible (we can define ip address instead of instance id) and send any command instaed of df -Th
+
+ansible -m command -a "df -Th" -u username instanceid --private-key=kay.pem.pem
+
