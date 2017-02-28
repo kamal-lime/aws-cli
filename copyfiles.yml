@@ -2,20 +2,54 @@ If we want to copy files to remote server with ansible than
 
 create a directory in ansible server and placed sorce files to it
 
-#####################
+####################
 ---
 -
-  hosts: [instance id]
+  hosts: [instance id ]
   sudo: true
   user: username
   tasks:
     -
-      copy:
-       src: /tmp/12
-       src: /tmp/13
-       dest: /var/www/
+      copy: src={{ item }} dest=/home/web
+      with_items:
+        - /tmp/12
+        - /tmp/13
        
        
        
 Here it will copy files from /tmp directory to remote hoste /var/www
+
+
+
+SOme more example
+
+
+############
+
+---
+# role/example/tasks/main.yml
+- name: Create our remote directory structure
+  file: path=/home/{{user_name}}/{{ item }}
+    owner={{user_name}}
+    group={{user_name}}
+    mode=0700
+  with_items:
+    - subdir
+    - subdir/another-dir
+    - third-dir
+
+- name: Copy multiple files to our server
+  copy: src={{ item }} dest=/home/codereview/{{ item }}
+    owner={{user_name}}
+    group={{user_name}}
+    mode=0700
+  with_items:
+    - 10mb-file.bin
+    - another-file.mpg
+    - subdir/third-file.jpg
+    
+    
+ ###########
+ 
+ https://codereviewvideos.com/course/ansible-tutorial/video/ansible-files-for-beginners
 
