@@ -12,20 +12,24 @@ do
     echo "AvailabilityZone InstanceType Reserved Actual Underprovisioned"
     first="false"
   fi
-  for itype in `aws ec2 describe-reserved-instances --filters Name=state,Values=active | grep InstanceType | sed -e 's/ //g' | cut -d'"' -f 4 | sort -u`
+  for itype in `/usr/local/bin/aws ec2 describe-reserved-instances --filters Name=state,Values=active | grep InstanceType | sed -e 's/ //g' | cut -d'"' -f 4 | sort -u`
   do
-    rcount=$(aws ec2 describe-reserved-instances --filters Name=state,Values=active Name=instance-type,Values=$itype | egrep 'InstanceCount' | awk '{print $NF}' | awk 'BEGIN{i=0}{i=i+$1}END{print i}')
-    icount=$(aws ec2 describe-instances --filter Name=availability-zone,Values=$az Name=instance-type,Values=$itype | grep InstanceId | wc -l)
+    rcount=$(/usr/local/bin/aws ec2 describe-reserved-instances --filters Name=state,Values=active Name=instance-type,Values=$itype | egrep 'InstanceCount' | awk '{print $NF}' | awk 'BEGIN{i=0}{i=i+$1}END{print i}')
+    icount=$(/usr/local/bin/aws ec2 describe-instances --filter Name=availability-zone,Values=$az Name=instance-type,Values=$itype Name=instance-state-code,Values=16 | grep InstanceId | wc -l)
 
     echo "$az $itype $rcount $icount" | awk '{ if($4<$3){alert="YES"} print $1" "$2" "$3" "$4" "alert}'
 
   done;
 
-done | column -t > /tmp/output.txt
+done | column -t > /tmp/output1.txt
 
-input="/tmp/output.txt"
+if grep -q YES "/tmp/output1.txt"; then
+
+ input="/tmp/output1.txt"
 tmpfile="/tmp/tmpfile.html"
 rm $tmpfile
 
 awk 'BEGIN{print "<html><body><table border=1>"} {print "<tr>";for(i=1;i<=NF;i++)print "<td>" $i"</td>";print "</tr>"} END{print "</table></body></html>"}' "$input" >> "$tmpfile"
-mailx  -a 'Content-Type: text/html' -s "Limeroad Reserved Instance Utilization Report" test@example.com < "$tmpfile"
+mailx  -a 'Content-Type: text/html' -s "P0 Limeroad Reserved Instance is Underprovisioned" xyz@example.com < "$tmpfile"
+
+fi
