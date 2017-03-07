@@ -1,0 +1,7 @@
+to list all user in linux server
+
+# cut -d: -f1 /etc/passwd
+
+to check expired account detail
+
+cat shadow | cut -d: -f1,8 | sed /:$/d
