@@ -5,3 +5,7 @@ to list all user in linux server
 to check expired account detail
 
 cat shadow | cut -d: -f1,8 | sed /:$/d
+
+
+## below link will describe how to backup and restore ssh user
+https://www.cyberciti.biz/faq/howto-move-migrate-user-accounts-old-to-new-server/
