@@ -9,3 +9,6 @@ cat shadow | cut -d: -f1,8 | sed /:$/d
 
 ## below link will describe how to backup and restore ssh user
 https://www.cyberciti.biz/faq/howto-move-migrate-user-accounts-old-to-new-server/
+
+
+# userdel -r username  - to remove user and home dir
