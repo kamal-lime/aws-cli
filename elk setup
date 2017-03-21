@@ -1,0 +1,10 @@
+#### in client machine 
+
+echo 'deb http://packages.elastic.co/logstashforwarder/debian stable main' | sudo tee /etc/apt/sources.list.d/logstashforwarder.list
+ sudo apt-get install logstash-forwarder
+ sudo cp logstash-forwarder.crt /etc/pki/tls/certs/
+ 
+ sudo vim /etc/logstash-forwarder.conf
+ 
+ define the elk server name and port 
+ 
