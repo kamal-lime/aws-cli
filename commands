@@ -12,3 +12,18 @@ https://www.cyberciti.biz/faq/howto-move-migrate-user-accounts-old-to-new-server
 
 
 # userdel -r username  - to remove user and home dir
+
+
+##########
+to increase ulimit in ubuntu - /etc/security/limits.conf
+
+* soft nproc 655350 
+* hard nproc 655350 
+* soft nofile 655350 
+* hard nofile 655350
+
+and reboot
+
+ulimit -n
+
+########
