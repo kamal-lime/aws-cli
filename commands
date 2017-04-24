@@ -27,3 +27,7 @@ and reboot
 ulimit -n
 
 ########
+
+grep instance id from opswork 
+
+aws opsworks --region ap-southeast-1 describe-instances --stack-id stack id name | grep -w "InstanceId" | xargs | awk  '{print $2}' | sed 's/.$//'
