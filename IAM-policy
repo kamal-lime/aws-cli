@@ -17,3 +17,32 @@
 }
 
 #####################################
+
+### resource lavel permission 
+
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": [
+        "ec2:StartInstances",
+        "ec2:StopInstances",	  
+        "ec2:RebootInstances"
+      ],
+      "Condition": {
+        "StringEquals": {
+          "ec2:ResourceTag/qa":"true"
+        }
+      },
+      "Resource": [
+        "arn:aws:ec2:ap-southeast-1:004873560073:instance/*"
+      ],
+      "Effect": "Allow"
+    }
+  ]
+}
+
+#####
+
+https://aws.amazon.com/blogs/security/resource-level-permissions-for-ec2-controlling-management-access-on-specific-instances
+
