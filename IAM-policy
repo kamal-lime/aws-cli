@@ -21,25 +21,26 @@
 ### resource lavel permission 
 
 {
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Action": [
-        "ec2:StartInstances",
-        "ec2:StopInstances",	  
-        "ec2:RebootInstances"
-      ],
-      "Condition": {
-        "StringEquals": {
-          "ec2:ResourceTag/qa":"true"
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Action": [
+                "ec2:StartInstances",
+                "ec2:StopInstances",
+                "ec2:RebootInstances",
+                "ec2:DescribeInstances"
+            ],
+            "Condition": {
+                "StringEquals": {
+                    "ec2:ResourceTag/Team": "qa"
+                }
+            },
+            "Resource": [
+                "*"
+            ],
+            "Effect": "Allow"
         }
-      },
-      "Resource": [
-        "arn:aws:ec2:ap-southeast-1:004873560073:instance/*"
-      ],
-      "Effect": "Allow"
-    }
-  ]
+    ]
 }
 
 #####
