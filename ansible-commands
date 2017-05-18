@@ -19,5 +19,8 @@ ansible -m command -a "df -Th" -u username instanceid --private-key=kay.pem
 
 ansible -m command -a "df -Th" -u username "instanceid1,instanceid2,instanceid3" --private-key=kay.pem
 
+# to run shell command to remote host
+ansible -m shell -a 'uname -a' -u username --private-key=key.pem host
+
 
 
