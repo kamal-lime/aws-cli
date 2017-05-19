@@ -24,6 +24,13 @@ to increase ulimit in ubuntu - /etc/security/limits.conf
 
 and reboot
 
+## If you want to apply changes without reboot, modify /etc/pam.d/common-session by adding this line at the end of file:
+
+session required pam_limits.so
+
+
+
+
 ulimit -n
 
 ########
