@@ -38,3 +38,13 @@ ulimit -n
 grep instance id from opswork 
 
 aws opsworks --region ap-southeast-1 describe-instances --stack-id stack id name | grep -w "InstanceId" | xargs | awk  '{print $2}' | sed 's/.$//'
+
+
+####
+if some time rsyslog not creation logs and if u restart it start failed and see log its - bufer full error than do below
+
+sudo apt-get install --only-upgrade apparmor
+
+restart apparmor and rsyslog
+
+##########
