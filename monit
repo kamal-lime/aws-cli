@@ -1,0 +1,8 @@
+to reload and restart any process in monit for memory
+check system localhost
+  if memory > 95%
+  for 4 cycles
+  then exec "/etc/init.d/nginx reload"
+
+
+#monit -t  - to check monit config
