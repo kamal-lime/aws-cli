@@ -1,0 +1,94 @@
+## Here is ansible and bash script to pull all running cronjobs from all servers and create a csv file.
+
+bash script 
+
+#############
+
+#!/bin/bash
+#this script will return a CSV file containing the server,user,cronjob
+##
+#this is set to be able to use filters on wildcards
+shopt -s extglob
+#here we store the hostname since we only need to declare this once
+HOST=$(hostname|cut -d"." -f1)
+#here we start looping through all the cron files exept the ones filtered by the pipe seperated list
+for f in $(ls /var/spool/cron/crontabs/*;ls /etc/cron.d/!(*@(sysstat|0hourly)) 2>>/dev/null )
+do
+        #here we store the content of the current cron file
+        COMMAND=$(cat $f)
+        #here we loop over the individual jobs in the file while filtering out comments and empty lines
+        echo "$COMMAND" | sed /^#/d | sed /^\s*$/d | while read line;
+        do
+                #here we start printing a line for our CSV file
+                #starting with the host
+                printf $HOST","
+                #here we check if it is a user or a system cron and we print accordingly
+                if [[ $f == /var/spool/cron/* ]];
+                then
+                        USER=${f##*/}
+                        printf $USER","
+                else
+                        printf "system,"
+                fi
+                #and finally here we print the actual command and since we desire a new line echo is used here instead of printf
+                echo "$line"
+        done
+done
+
+
+##############################
+
+Ansible - create a yml file 
+
+#################################
+
+- hosts: instance id or tag name
+  #gather_facts: no
+#  sudo: true
+  tasks:
+#  - name: create folder
+#    local_action: file dest=/tmp/cron_collect state=directory owner=root group=root mode=0700
+  - block:
+    - name: "collect crons on system"
+      script: "/tmp/cron1.sh"
+      sudo: true
+      register: ansible
+      ignore_errors: yes
+    - name: move to csv file
+      local_action: copy content={{ ansible.stdout }} dest=/home/ansible/cron_collect/{{ansible_fqdn}}.csv
+- hosts: localhost:hostname
+  gather_facts: no
+  tasks:
+  - name: combine into one file
+    assemble:
+      src: /home/ansible/cron_collect/
+      dest: /tmp/croncollection.csv
+      owner: ansible
+      group: ansible
+      mode: 0640
+  - name: remove blanks
+    lineinfile:
+      dest: /tmp/croncollection.csv
+      regexp: '^\s$'
+      state: absent
+      
+      
+      
+  ###################################
+  
+  
+  install grive 
+  
+  sudo apt-add-repository ppa:nilarimogard/webupd8
+sudo apt-get update
+sudo apt-get install grive
+
+grive -a -u -s cron_list/croncollection.csv - it will create folder in gdrive
+
+next time after authenticate in gdrive
+
+grive -u -s cron_list/croncollection.csv
+
+
+
+
