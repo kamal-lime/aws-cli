@@ -1,0 +1,33 @@
+if converted instance from PV to HVM and instance not boot after stop
+than stop the instance - detach the root volume and attach in another running instance than follow below steps
+
+sudo mount /dev/xvdg /mnt
+
+sudo mount --bind /dev /mnt/dev
+
+sudo mount --bind /proc /mnt/proc
+
+sudo mount --bind /sys /mnt/sys
+
+sudo mount -o bind /run /mnt/run
+
+
+sudo chroot /mnt
+
+apt-get update
+
+apt-get install  grub-pc  grub-pc-bin grub-legacy-ec2 grub-gfxpayload-lists
+
+grub-install --no-floppy --recheck --force /dev/xvdg
+
+update-grub2
+
+ctrl+d to exit
+
+umount /mnt/dev
+
+umount /mnt/proc
+
+umount /mnt/sys
+
+umount /mnt/run
