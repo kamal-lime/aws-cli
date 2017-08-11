@@ -48,3 +48,12 @@ sudo apt-get install --only-upgrade apparmor
 restart apparmor and rsyslog
 
 ##########
+
+###############
+
+Check Enhanced Networking in aws instance 
+
+http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/sriov-networking.html
+
+
+######
