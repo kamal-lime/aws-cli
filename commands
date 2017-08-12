@@ -15,6 +15,9 @@ https://www.cyberciti.biz/faq/howto-move-migrate-user-accounts-old-to-new-server
 
 
 ##########
+cat /proc/sys/fs/file-max  - view the current limit on the number of file-open
+
+
 to increase ulimit in ubuntu - /etc/security/limits.conf
 
 * soft nproc 655350 
