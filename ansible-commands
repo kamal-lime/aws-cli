@@ -22,5 +22,11 @@ ansible -m command -a "df -Th" -u username "instanceid1,instanceid2,instanceid3"
 # to run shell command to remote host
 ansible -m shell -a 'uname -a' -u username --private-key=key.pem host
 
+## to set value in .bashrc
+
+ansible -m shell -a 'echo "ulimit -c unlimited >/dev/null 2>&1" >> /root/.bashrc' -u ec2-user --become --private-key=key.pem host
 
 
+# run source command
+
+ansible -m shell -a 'source /root/.bashrc' -u ec2-user --become --become-user=root --private-key=key.pem host
