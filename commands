@@ -60,3 +60,9 @@ http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/sriov-networking.html
 
 
 ######
+Resolved: ‘/bin/rm: Argument list too long’ error
+if you empty a directory that have large number of files than, 
+
+find . -name "*xlsx" | xargs rm -f
+
+############################
