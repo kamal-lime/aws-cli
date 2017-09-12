@@ -30,3 +30,7 @@ ansible -m shell -a 'echo "ulimit -c unlimited >/dev/null 2>&1" >> /root/.bashrc
 # run source command
 
 ansible -m shell -a 'source /root/.bashrc' -u ec2-user --become --become-user=root --private-key=key.pem host
+
+# check any particular file content in all servers
+
+ansible -m shell -a 'cat /home/username/.ssh/id_rsa.pub' -u user --private-key=key.pem tag_serveros_ubuntu >> keylisyt.txt
