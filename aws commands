@@ -1,0 +1,5 @@
+aws configure
+
+aws configure --profile prod  : - to crerate profile in config file
+
+aws ec2 describe-instances --profile user2  : - to access aws with specific profile
