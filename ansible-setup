@@ -15,6 +15,9 @@ create a user name - ansible
 adduser ansible
 chown -R ansible:ansible /etc/ansible
 
+change the home directiry (optional)
+usermod -d /var/www/ tecmint
+
 aws configure in ansible user
 access key
 secret key
