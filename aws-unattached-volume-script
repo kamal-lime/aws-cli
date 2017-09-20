@@ -1,0 +1,53 @@
+## Here is the script to list all your Unattached vulume that still exist is aws account and its shows state - Available , its causing Extra cost .
+
+install aws cli
+install boto
+install skew
+
+now configure with aws credentials
+
+aws configure --profile prod
+
+sudo pip install skew
+
+now create a file in home directory - 
+vim .skew
+
+paste below content
+###############
+---
+  accounts:
+    "your aws account number":
+      profile: prod
+#######################
+
+now save and exit
+
+now create a python script,
+
+This python script scan All volumes
+
+####
+
+import skew
+
+total_size = 0
+total_volumes = 0
+
+for volume in skew.scan('arn:aws:ec2:*:*:volume/*'):
+    if not volume.data['Attachments']:
+        total_volumes += 1
+        total_size += volume.data['Size']
+        print('%s: %dGB' % (volume.arn, volume.data['Size']))
+print('Total unattached volumes: %d' % total_volumes)
+print('Total size (GB): %d' % total_size)
+
+
+
+####
+
+
+mail alert 
+
+
+30 12 * * * python yourscript.py | mail -s "**Unattached Volume in Prod AWS**" emailid
