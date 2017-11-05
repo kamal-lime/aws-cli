@@ -81,3 +81,12 @@ add in ansible.cfg
 inventory      = /etc/ansible/ec2.py
 
 remote_user = username
+
+if you face below error while run ec2.py --list
+
+ImportError: No module named ansible.module_utils
+
+
+thnan 
+
+sudo pip install ansible
