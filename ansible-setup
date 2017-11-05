@@ -5,6 +5,31 @@ $ sudo apt-add-repository ppa:ansible/ansible
 $ sudo apt-get update
 $ sudo apt-get install ansible
 
+### installation in centos
+## Install ansible in Amazon or centos linux
+
+Add epel repo
+
+RHEL/CentOS 6 64-Bit ##
+# wget http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+# sudo rpm -ivh epel-release-6-8.noarch.rpm
+
+sudo yum update
+
+to check ansible version available
+
+yum --enablerepo=epel info ansible
+
+yum --enablerepo=epel install ansible
+
+if you get python "python27-jmespath" error than uninstall this
+
+yum remove python27-jmespath
+
+ansible --version
+
+#####
+
 sudo apt-get install python-pip
 pip install boto
 
@@ -46,9 +71,11 @@ vpc_destination_variable = private_ip_address
 changes in ec2.py
 add secret key and access key
 
-
+add this in .bashrc
 export EC2_INI_PATH=/etc/ansible/ec2.ini
 
+
+####
 add in ansible.cfg
 
 inventory      = /etc/ansible/ec2.py
