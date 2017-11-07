@@ -90,3 +90,8 @@ ImportError: No module named ansible.module_utils
 thnan 
 
 sudo pip install ansible
+
+
+### to bypass ssh host verification for known_host in ansible 
+
+host_key_checking = False
