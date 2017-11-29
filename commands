@@ -66,3 +66,9 @@ if you empty a directory that have large number of files than,
 find . -name "*xlsx" | xargs rm -f
 
 ############################
+
+its better to truncate a log file than delete or empty
+
+use this commad to truncate log file
+
+truncate -s 0 filename
