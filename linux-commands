@@ -72,3 +72,7 @@ its better to truncate a log file than delete or empty
 use this commad to truncate log file
 
 truncate -s 0 filename
+##################################
+use sudo while echo content in file
+
+sudo sh -c "echo "ansible-$HOSTNAME" > /etc/hostname"
