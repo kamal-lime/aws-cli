@@ -1,0 +1,1 @@
+cat access.log | grep " 404 " | awk -F'"' '{print $1,",",$2}' > /home/ubuntu/404.log
