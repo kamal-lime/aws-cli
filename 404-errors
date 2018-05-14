@@ -1,0 +1,6 @@
+#grep 404 and 500 , 200 errors from nginx or apache access.log
+cat access.log1 | grep " 200 " | awk -F'"' '{print $1,"-",$2}' >> 404.log
+
+awk -F'"' : - Field separator 
+
+{print $1,"-",$2} : - "-" added - in two line
