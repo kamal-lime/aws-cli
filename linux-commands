@@ -76,3 +76,9 @@ truncate -s 0 filename
 use sudo while echo content in file
 
 sudo sh -c "echo "ansible-$HOSTNAME" > /etc/hostname"
+
+### change the user shell
+chsh --shell /bin/zsh aman
+
+# check the currnt shell 
+echo $0
