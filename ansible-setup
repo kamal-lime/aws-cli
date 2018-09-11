@@ -87,7 +87,7 @@ if you face below error while run ec2.py --list
 ImportError: No module named ansible.module_utils
 
 
-thnan 
+then 
 
 sudo pip install ansible
 
