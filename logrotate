@@ -1,0 +1,10 @@
+delete only log file 
+
+/nfs/export/*.csv.1 {
+        su www-data www-data
+        daily
+    missingok
+    rotate 0
+    notifempty
+}
+~     
