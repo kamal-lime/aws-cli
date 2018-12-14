@@ -85,3 +85,8 @@ echo $0
 
 ## delete empty file
 find . -size 0 -print0 | xargs -0 rm --
+
+##
+delete data for selected months
+
+ll | grep Jul | awk '{print $9}' | xargs rm -rf
