@@ -90,3 +90,8 @@ find . -size 0 -print0 | xargs -0 rm --
 delete data for selected months
 
 ll | grep Jul | awk '{print $9}' | xargs rm -rf
+
+
+## python server with auth
+
+python -m SimpleHTTPAuthServer 8080 log:log@87654 &
