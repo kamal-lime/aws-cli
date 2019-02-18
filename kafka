@@ -1,0 +1,12 @@
+1 list kafka topics
+
+./bin/kafka-topics.sh --list --zookeeper localhost:2181
+
+2. Describe topics 
+
+./bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic topic name
+
+
+increae the partition for topics
+
+./bin/kafka-topics.sh --zookeeper localhost:2181 --alter --topic topicname --partitions 10
