@@ -10,3 +10,6 @@ aws opsworks --region us-east-1 create-instance --stack-id xxxx-xxxx-xxxx-xxxx -
 ## aws opswork create instance in bulk with loop
 
 for i in `seq 2`; do aws opsworks --region us-east-1 create-instance --stack-id xxxx-xxxx-xxxx-xxxx --layer-ids xxxx-xxxxx-xxxxx-xxxx --instance-type c4.2xlarge --os "Custom" --ami-id ami-xxxx; done
+
+# put retention policy in cloudwatch logs group
+aws logs put-retention-policy --log-group-name log-group-name --retention-in-day 7 --profile mumbai
