@@ -95,3 +95,25 @@ ll | grep Jul | awk '{print $9}' | xargs rm -rf
 ## python server with auth
 
 python -m SimpleHTTPAuthServer 8080 log:log@87654 &
+
+#increase max open file in centos
+vim /etc/security/limits.conf
+*       soft  nofile  655350
+*       hard  nofile  655350
+
+save and exit,logout and relogin or restart the service which u want to reflect
+check with this command, here i ahve done for mongo
+cat /proc/$(cat /var/run/mongodb/mongod.pid)/limits | grep open.files
+
+## increase memory lock to unlimited
+
+vim /etc/security/limits.conf
+
+mongod soft memlock unlimited
+mongod hard memlock unlimited
+
+save and exit,logout and relogin or restart the service which u want to reflect
+check with this command, here i ahve done for mongo
+cat /proc/$(cat /var/run/mongodb/mongod.pid)/limits | grep mem
+
+
