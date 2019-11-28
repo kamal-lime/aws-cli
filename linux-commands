@@ -116,4 +116,8 @@ save and exit,logout and relogin or restart the service which u want to reflect
 check with this command, here i ahve done for mongo
 cat /proc/$(cat /var/run/mongodb/mongod.pid)/limits | grep mem
 
+### resize aws root volume partition
+sudo growpart /dev/xvda 1
+resize2fs /dev/xvda1
+
 
