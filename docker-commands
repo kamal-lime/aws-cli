@@ -1,0 +1,3 @@
+to check file inside docker container
+
+$docker exec -it 816d0c7e0707 cat opt/config/cart/application.properties
