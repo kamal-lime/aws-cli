@@ -13,3 +13,8 @@ for i in `seq 2`; do aws opsworks --region us-east-1 create-instance --stack-id 
 
 # put retention policy in cloudwatch logs group
 aws logs put-retention-policy --log-group-name log-group-name --retention-in-day 7 --profile mumbai
+
+#to check ENI is enabled in instance
+aws ec2 describe-instances --instance-ids i-046beefefea08e --query "Reservations[].Instances[].EnaSupport"
+# to enable ENI support in instance
+aws ec2 modify-instance-attribute --instance-id i-046befjeifiefea08e --ena-support --profile jflmumbai
