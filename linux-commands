@@ -120,4 +120,9 @@ cat /proc/$(cat /var/run/mongodb/mongod.pid)/limits | grep mem
 sudo growpart /dev/xvda 1
 resize2fs /dev/xvda1
 
+## enable -disable php versions in apache
+
+a2dismod php5
+a2enmod php5.6
+
 
