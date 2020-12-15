@@ -125,4 +125,8 @@ resize2fs /dev/xvda1
 a2dismod php5
 a2enmod php5.6
 
+# curl command to check url woth user agent
+
+curl -I https://www.example.com/ -A "SemrushBot -BA"
+
 
