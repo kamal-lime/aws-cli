@@ -1,0 +1,17 @@
+remove bulk list of emails added in SES suppression list.
+- check list of suppression list
+aws sesv2 list-suppressed-destinations --profile test --region us-east-1
+
+copy the list in text file
+
+#!/bin/bash
+date
+cat list.txt |  while read output
+do
+ aws sesv2 delete-suppressed-destination --region=us-east-1 --profile test --email-address "$output"
+    
+done
+
+save file 
+
+sh sesremove.sh >> list.log | tail -f list.log
