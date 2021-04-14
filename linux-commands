@@ -129,4 +129,12 @@ a2enmod php5.6
 
 curl -I https://www.example.com/ -A "SemrushBot -BA"
 
+sed 's/"//g' removes all double quotes on each line
+
+sed 's/^/"/' adds a double-quote at the beginning of each line
+
+sed 's/$/"/' adds a double-quote at the end of each line
+
+sed 's/|/"|"/g' adds a quote before and after each pipe.
+
 
