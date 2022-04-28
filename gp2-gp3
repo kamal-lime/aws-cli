@@ -1,0 +1,14 @@
+aws ec2 describe-volumes --region test --profile test --filters Name=volume-type,Values=gp2 | jq -r '.Volumes[].VolumeId'
+
+save volume in txt file
+
+create a script
+
+#!/bin/bash
+cat volume.txt | while read output
+do
+aws ec2 modify-volume --region test --profile test --volume-type=gp3 --volume-id "$output"
+
+done
+
+######
